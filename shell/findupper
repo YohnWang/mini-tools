@@ -1,0 +1,15 @@
+#! usr/bin/bash
+
+root=.
+real=`realpath $root`
+while [ ${real} != "/" ] && [ ! -e ${root}/$1 ]
+do
+    root=${root}/..
+    real=`realpath $root`
+done
+if [ ${real} != "/" ] && [ -e ${root}/$1 ]; then
+    echo ${root}
+else
+    echo can not find $1 >&2
+    exit 1
+fi
